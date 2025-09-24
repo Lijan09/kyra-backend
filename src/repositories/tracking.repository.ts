@@ -12,4 +12,8 @@ export class TrackingRepository {
   async bulkCreate(data: Partial<ITracking>[]) {
     return await Tracking.insertMany(data);
   }
+
+  async countLogs(): Promise<number> {
+    return await Tracking.countDocuments();
+  }
 }

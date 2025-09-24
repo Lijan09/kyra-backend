@@ -8,4 +8,8 @@ export class FileRepository {
   async findAll() {
     return await File.find().sort({ timestamp: -1 });
   }
+
+  async countFiles(): Promise<number> {
+    return await File.countDocuments();
+  }
 }

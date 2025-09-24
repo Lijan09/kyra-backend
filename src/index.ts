@@ -1,18 +1,16 @@
+import { qualityCheck } from "./controllers/quality.controller";
 import express from "express";
-import multer from "multer";
 import { dbConnect } from "./config/db";
 import { logAction, getActions } from "./controllers/tracking.controller";
 import { translateText } from "./controllers/translation.controller";
 import { uploadFile, getFiles } from "./controllers/file.controller";
 import { upload } from "./middlewares/file.middleware";
 import { trackAction } from "./middlewares/tracking.middleware";
-import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/error.middleware";
+import "./cron/quality.cron";
+import config from "./config/config";
 
-dotenv.config();
-
-const PORT = process.env.PORT || 3000;
-
+const port = config.port;
 const app = express();
 app.use(express.json());
 app.use(trackAction);
@@ -42,8 +40,12 @@ app.post(
 
 app.get("/files", getFiles);
 
+app.get("/qualityCheck", qualityCheck);
+
 app.use(errorHandler);
 
 dbConnect().then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(port, () => console.log(`Server running on port ${port}`));
 });
+
+import "./cron/quality.cron";
