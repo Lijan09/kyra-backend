@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import { dbConnect } from "./config/db";
 import { logAction, getActions } from "./controllers/tracking.controller";
-// import { translateText } from "./controllers/translationController";
+import { translateText } from "./controllers/translation.controller";
 import { uploadFile, getFiles } from "./controllers/file.controller";
 import { upload } from "./middlewares/file.middleware";
 import { trackAction } from "./middlewares/tracking.middleware";
@@ -21,7 +21,7 @@ app.use(trackAction);
 app.post("/track", logAction);
 app.get("/track", getActions);
 
-// app.post("/translate", translateText);
+app.post("/translate", translateText);
 
 // app.post("/upload", upload.single("file"), uploadFile);
 
