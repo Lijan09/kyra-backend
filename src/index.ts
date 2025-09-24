@@ -10,7 +10,7 @@ import { errorHandler } from "./middlewares/error.middleware";
 import "./cron/quality.cron";
 import config from "./config/config";
 
-const port = config.port;
+const port = config.port || 3000;
 const app = express();
 app.use(express.json());
 app.use(trackAction);
