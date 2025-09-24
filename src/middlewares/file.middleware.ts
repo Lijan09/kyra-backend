@@ -29,8 +29,13 @@ const fileFilter = (
     "image/jpeg",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   ];
-  if (allowedTypes.includes(file.mimetype)) cb(null, true);
-  else {
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    logger.warn("file_upload_rejected", {
+      filename: file.originalname,
+      mimetype: file.mimetype,
+    });
     cb(new Error("Invalid file format"));
   }
 };

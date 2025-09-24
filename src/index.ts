@@ -23,7 +23,23 @@ app.get("/track", getActions);
 
 // app.post("/translate", translateText);
 
-app.post("/upload", upload.single("file"), uploadFile);
+// app.post("/upload", upload.single("file"), uploadFile);
+
+app.post(
+  "/upload",
+  (req, res, next) => {
+    upload.single("file")(req, res, (err) => {
+      if (err) {
+        console.log("index error: ", err.message);
+        return next(err);
+      }
+      if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+      next();
+    });
+  },
+  uploadFile
+);
+
 app.get("/files", getFiles);
 
 app.use(errorHandler);

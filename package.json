@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",
+    "test": "jest --watchAll",
     "start": "node dist/index.js"
   },
   "keywords": [],
@@ -13,9 +14,15 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/mongoose": "^5.11.96",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.5.2",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.1.3",
+    "mongodb-memory-server": "^10.2.1",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
